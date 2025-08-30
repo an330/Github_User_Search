@@ -1,4 +1,66 @@
 package com.example.githubusersearch.uiUser
 
-class UserDetailScreen {
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.githubusersearch.viewModal.UserDetailViewModal
+import org.w3c.dom.Text
+
+@Composable
+fun UserDetailScreen(
+    userName:String,
+    onBack:() ->Unit ={},
+    viewModal: UserDetailViewModal= hiltViewModel()
+) {
+    val user by viewModal.user.collectAsState()
+    val error by viewModal.error.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(userName) {
+        viewModal.loadUser(userName)
+    }
+    Scaffold(topBar = { TopAppBar(
+        title = { Text(userName) }, navigationIcon = { IconButton(onClick = onBack){ Icon(Icons.Default.ArrowBack
+        , contentDescription = null) } }
+    ) } ) { padding ->
+        Box(modifier = Modifier.fillMaxSize(padding)){
+            when{
+                error != null -> {
+                    Text(text =error?: "Error", color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(16.dp))
+                }
+                user == null -> {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
+                else{
+                      UserDetailContent(user = user!!,
+                          onOpenRepo ={url->
+                              val i = Intent(Intent.ACTION_VIEW,Uri.parse(url))
+                              context.startActivity(i)
+                          } )
+                }
+            }
+        }
+
+    }
 }
+
