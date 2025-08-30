@@ -2,8 +2,8 @@ package com.example.githubusersearch.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.githubusersearch.data.GitHubApi
-import com.example.githubusersearch.data.User
+import com.example.githubusersearch.data.remote.GitHubApi
+import com.example.githubusersearch.data.remote.User
 
 class UserPagingSource(
     private val api: GitHubApi,

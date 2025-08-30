@@ -2,7 +2,7 @@ package com.example.githubusersearch.viewModal
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.githubusersearch.data.UserDetail
+import com.example.githubusersearch.data.remote.UserDetail
 import com.example.githubusersearch.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

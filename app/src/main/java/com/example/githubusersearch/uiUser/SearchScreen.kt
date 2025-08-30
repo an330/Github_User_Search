@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
-import com.example.githubusersearch.data.User
+import com.example.githubusersearch.data.remote.User
 import com.example.githubusersearch.viewModal.SearchViewModel
 
 

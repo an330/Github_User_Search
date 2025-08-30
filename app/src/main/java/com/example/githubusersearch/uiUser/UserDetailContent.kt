@@ -17,11 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.githubusersearch.data.UserDetail
-import com.example.githubusersearch.data.repository.UserRepository
+import com.example.githubusersearch.data.remote.UserDetail
 
 @Composable
-fun UserDetailContent(user:UserDetail, onOpenRepo:(String) ->Unit) {
+fun UserDetailContent(user: UserDetail, onOpenRepo:(String) ->Unit) {
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {  }
       Row {

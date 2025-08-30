@@ -1,6 +1,6 @@
 package com.example.githubusersearch.di.Network
 
-import com.example.githubusersearch.data.GitHubApi
+import com.example.githubusersearch.data.remote.GitHubApi
 import com.example.githubusersearch.data.repoImpl.UserRepositoryImpl
 import com.example.githubusersearch.data.repository.UserRepository
 import com.google.gson.GsonBuilder
@@ -49,5 +49,5 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(api:GitHubApi) : UserRepository = UserRepositoryImpl(api)
+    fun provideUserRepository(api: GitHubApi) : UserRepository = UserRepositoryImpl(api)
 }

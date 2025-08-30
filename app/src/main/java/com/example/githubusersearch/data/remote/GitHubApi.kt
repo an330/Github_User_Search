@@ -1,4 +1,4 @@
-package com.example.githubusersearch.data
+package com.example.githubusersearch.data.remote
 
 import retrofit2.http.GET
 import retrofit2.http.Path
