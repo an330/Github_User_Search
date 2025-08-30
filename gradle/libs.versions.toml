@@ -17,7 +17,7 @@ material3 = "1.2.0"
 retrofit = "2.9.0"
 gson = "2.10.0"
 coil = "2.6.0"
-paging = "3.2.1"
+paging = "3.3.0"
 accompanist-swiperefresh = "0.34.0"
 
 [libraries]

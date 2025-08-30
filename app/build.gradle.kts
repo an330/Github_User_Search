@@ -59,6 +59,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
+
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
@@ -77,8 +79,9 @@ dependencies {
     implementation(libs.accompanist.swiperefresh)
 
     // Paging 3
-    implementation("androidx.paging:paging-runtime:3.2.1")
-    implementation("androidx.paging:paging-compose:3.2.1")
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
+
 
     // Network
     implementation(libs.retrofit)

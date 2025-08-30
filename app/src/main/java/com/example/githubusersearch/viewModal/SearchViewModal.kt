@@ -17,20 +17,24 @@ import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModal@Inject constructor(private val repository: UserRepository): ViewModel() {
+class SearchViewModel @Inject constructor(
+    private val repository: UserRepository
+) : ViewModel() {
+
     private val _query = MutableStateFlow("")
     val query = _query.asStateFlow()
 
-
-    val user = _query.debounce(350)
+    val users = _query
+        .debounce(350)
         .distinctUntilChanged()
-        .flatMapLatest { q->
-            if(q.isBlank()){
+        .flatMapLatest { q ->
+            if (q.isBlank()) {
                 flowOf<PagingData<User>>(PagingData.empty())
-            }else{
+            } else {
                 repository.searchUsersPager(q).flow
             }
         }
         .cachedIn(viewModelScope)
-    fun onQueryChange(q:String) {_query.value = q}
+
+    fun onQueryChange(q: String) { _query.value = q }
 }

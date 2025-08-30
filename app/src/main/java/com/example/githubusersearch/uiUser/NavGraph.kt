@@ -1,7 +1,5 @@
 package com.example.githubusersearch.uiUser
 
-import android.app.appsearch.SearchSpec
-import android.provider.ContactsContract.Profile
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -27,7 +25,7 @@ fun AppNavHost() {
             route = "detail/{username}",
             arguments = listOf(navArgument("username"){type =NavType.StringType } )){backStackEntry->
                 val userName = backStackEntry.arguments?.getString("username").orEmpty()
-                UserDetailScreen()
+                UserDetailScreen(userName = userName, onBack ={ navController.popBackStack()})
             }
     }
 }

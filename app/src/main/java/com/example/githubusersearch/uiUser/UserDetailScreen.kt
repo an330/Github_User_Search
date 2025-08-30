@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.githubusersearch.viewModal.UserDetailViewModal
 import org.w3c.dom.Text
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserDetailScreen(
     userName:String,
@@ -43,7 +45,7 @@ fun UserDetailScreen(
         title = { Text(userName) }, navigationIcon = { IconButton(onClick = onBack){ Icon(Icons.Default.ArrowBack
         , contentDescription = null) } }
     ) } ) { padding ->
-        Box(modifier = Modifier.fillMaxSize(padding)){
+        Box(modifier = Modifier.fillMaxSize().padding(padding)){
             when{
                 error != null -> {
                     Text(text =error?: "Error", color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(16.dp))
@@ -51,7 +53,7 @@ fun UserDetailScreen(
                 user == null -> {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
-                else{
+                else ->{
                       UserDetailContent(user = user!!,
                           onOpenRepo ={url->
                               val i = Intent(Intent.ACTION_VIEW,Uri.parse(url))
