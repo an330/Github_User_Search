@@ -24,12 +24,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.githubusersearch.viewModal.UserDetailViewModal
 import org.w3c.dom.Text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserDetailScreen(
+    navController: NavController,
     userName:String,
     onBack:() ->Unit ={},
     viewModal: UserDetailViewModal= hiltViewModel()
@@ -37,6 +40,7 @@ fun UserDetailScreen(
     val user by viewModal.user.collectAsState()
     val error by viewModal.error.collectAsState()
     val context = LocalContext.current
+
 
     LaunchedEffect(userName) {
         viewModal.loadUser(userName)
@@ -54,11 +58,14 @@ fun UserDetailScreen(
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
                 else ->{
-                      UserDetailContent(user = user!!,
-                          onOpenRepo ={url->
-                              val i = Intent(Intent.ACTION_VIEW,Uri.parse(url))
-                              context.startActivity(i)
-                          } )
+                    user?.let { user ->
+                        UserDetailContent(
+                            user = user,
+                            onOpenRepo = { login ->
+                                navController.navigate("repos/$login")   // ✅ navigate properly
+                            }
+                        )
+                    }
                 }
             }
         }

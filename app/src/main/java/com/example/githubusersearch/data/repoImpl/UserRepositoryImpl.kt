@@ -6,6 +6,7 @@ import com.example.githubusersearch.data.remote.GitHubApi
 import com.example.githubusersearch.data.remote.User
 import com.example.githubusersearch.data.remote.UserDetail
 import com.example.githubusersearch.data.paging.UserPagingSource
+import com.example.githubusersearch.data.remote.Repo
 import com.example.githubusersearch.data.repository.UserRepository
 import javax.inject.Inject
 
@@ -15,4 +16,12 @@ class UserRepositoryImpl@Inject constructor(private val api: GitHubApi) :UserRep
     }
 
     override suspend fun getUserDetail(UserName: String): UserDetail = api.getUser(UserName)
+    override suspend fun getUserRepos(
+        userName: String,
+        page: Int,
+        perPage: Int,
+        sort: String
+    ): List<Repo> {
+        return api.getUserRepos(userName, page, perPage, sort)
+    }
 }

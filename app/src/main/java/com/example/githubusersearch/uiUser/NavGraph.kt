@@ -9,7 +9,7 @@ import androidx.navigation.navArgument
 
 object Routes{
     const val SEARCH = "search"
-    const val PROFILE = "profile/{username}"
+
 }
 
 @Composable
@@ -25,7 +25,14 @@ fun AppNavHost() {
             route = "detail/{username}",
             arguments = listOf(navArgument("username"){type =NavType.StringType } )){backStackEntry->
                 val userName = backStackEntry.arguments?.getString("username").orEmpty()
-                UserDetailScreen(userName = userName, onBack ={ navController.popBackStack()})
+                UserDetailScreen(navController,userName = userName, onBack ={ navController.popBackStack()})
             }
+        composable(
+            route = "repos/{username}",
+            arguments = listOf(navArgument("username"){type =NavType.StringType})
+        ){navBackStackEntry ->  
+            val userName = navBackStackEntry.arguments?.getString("username").orEmpty()
+            RepoScreen(userName)
+        }
     }
 }

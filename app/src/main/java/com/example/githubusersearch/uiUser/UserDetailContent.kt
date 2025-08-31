@@ -40,8 +40,8 @@ fun UserDetailContent(user: UserDetail, onOpenRepo:(String) ->Unit) {
           Spacer(Modifier.height(16.dp))
 
 
-          Button(onClick = { onOpenRepo("https://github.com/${user.login}") }) {
-              Text("Open on GitHub")
+          Button(onClick = { onOpenRepo(user.login) }) {
+              Text("View Repositories")
           }
       }
 }
